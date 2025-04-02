@@ -17,9 +17,8 @@ jobs:
 
       - name: Setup mingw
         run: |
-           mkdir "$Env:GITHUB_WORKSPACE\mingw"
-           Invoke-WebRequest -Uri "https://github.com/niXman/mingw-builds-binaries/releases/download/14.2.0-rt_v12-rev2/x86_64-14.2.0-release-win32-seh-ucrt-rt_v12-rev2.7z" -OutFile "$Env:GITHUB_WORKSPACE\mingw\mingw.7z"
-           Expand-Archive "$Env:GITHUB_WORKSPACE\mingw\mingw.7z" -DestinationPath "$Env:GITHUB_WORKSPACE\mingw"
+           Invoke-WebRequest -Uri "https://github.com/niXman/mingw-builds-binaries/releases/download/14.2.0-rt_v12-rev2/x86_64-14.2.0-release-win32-seh-ucrt-rt_v12-rev2.7z" -OutFile ".\mingw.7z"
+           Expand-Archive ".\mingw.7z" -DestinationPath ".\mingw"
            echo "$Env:GITHUB_WORKSPACE\mingw" >> $GITHUB_PATH
 
       - name: Set git
