@@ -10,7 +10,7 @@ GuideBook 汉化文本基于 [NetHack_GuideBook_CN](https://github.com/w4ngzhen/NetHac
 - [X] 合并 [NetHack-cn](https://github.com/SunnyYuer/NetHack-cn) 汉化文件
 - [ ] 合并与完善 GuideBook 汉化
 - [X] 同步至官方上游最新提交 [a812127](https://github.com/NetHack/NetHack/tree/a812127bf403af1d46acb5801b275ef4ed15afeb)
-- [X] 自动化编译脚本
+- ~~自动化编译脚本~~
 - [ ] 其它未汉化内容完善
 
 ## 如何编译
