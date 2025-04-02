@@ -54,6 +54,17 @@ echo      has been renamed to
 echo           ..\..\src\Makefile.gcc-orig
 :dogcc
 copy Makefile.gcc ..\..\src\Makefile.gcc >nul
+
+echo Copying MinGW Makefile - Makefile-Windows.gcc to ..\..\src\Makefile-Windows.gcc...
+if NOT exist ..\..\src\Makefile-Windows.gcc goto :dogcc
+copy ..\..\src\Makefile-Windows.gcc ..\..\src\Makefile-Windows.gcc-orig >nul
+echo      Your existing
+echo           ..\..\src\Makefile-Windows.gcc
+echo      has been renamed to
+echo           ..\..\src\Makefile-Windows.gcc-orig
+:dogcc
+copy Makefile-Windows.gcc ..\..\src\Makefile-Windows.gcc >nul
+
 echo MinGW Makefile copied ok.
 
 echo Done copying files.
