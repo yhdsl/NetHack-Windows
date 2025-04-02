@@ -1,0 +1,43 @@
+name: Build NetHack-Windows
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          path: './source'
+
+      - name: Setup mingw
+        run: |
+           Invoke-WebRequest -Uri "https://github.com/niXman/mingw-builds-binaries/releases/download/14.2.0-rt_v12-rev2/x86_64-14.2.0-release-win32-seh-ucrt-rt_v12-rev2.7z" -OutFile "$Env:GITHUB_WORKSPACE\mingw\mingw.7z"
+           Expand-Archive "$Env:GITHUB_WORKSPACE\mingw\mingw.7z" -DestinationPath "$Env:GITHUB_WORKSPACE\mingw"
+           echo "$Env:GITHUB_WORKSPACE\mingw" >> $GITHUB_PATH
+
+      - name: Set git
+        run: |
+           echo "C:\Program Files\Git\usr\bin" >> $GITHUB_PATH
+
+      - name: Run nhsetup
+        run: |
+           cd $Env:GITHUB_WORKSPACE\source\sys\winnt
+           .\nhsetup.bat
+
+      - name: Run build with new gcc
+        run: |
+           cd $Env:GITHUB_WORKSPACE\source\src
+           mingw32-make -f Makefile-Windows.gcc
+
+      - name : Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NetHack-Windows
+          path: |
+            .\source\binary\*
