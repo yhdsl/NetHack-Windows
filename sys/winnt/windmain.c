@@ -184,47 +184,48 @@ test_portable_config(
     char *portable_device_path,
     size_t portable_device_path_size)
 {
-    int lth = 0;
-    const char *sysconf = "sysconf";
-    char tmppath[MAX_PATH];
-    boolean retval = FALSE,
-            save_initoptions_noterminate = iflags.initoptions_noterminate;
-
-    if (portable_device_path && folder_file_exists(executable_path, "sysconf")) {
-        /*
-           There is a sysconf file (not just sysconf.template) present in
-           the exe path, which is not the way NetHack is initially distributed,
-           so assume it means that the admin/installer wants to override
-           something, perhaps set up for a fully-portable configuration that
-           leaves no traces behind elsewhere on this computer's hard drive -
-           delve into that...
-         */
-
-        *portable_device_path = '\0';
-        lth = sizeof tmppath - strlen(sysconf); 
-        (void) strncpy(tmppath, executable_path, lth - 1);
-        tmppath[lth - 1] = '\0';
-        (void) strcat(tmppath, sysconf);
-
-        iflags.initoptions_noterminate = 1;
-        /* assure_syscf_file(); */
-        config_error_init(TRUE, tmppath, FALSE);
-        /* ... and _must_ parse correctly. */
-        if (read_config_file(tmppath, SET_IN_SYS)
-            && sysopt.portable_device_paths)
-            retval = TRUE;
-        (void) config_error_done();
-        iflags.initoptions_noterminate = save_initoptions_noterminate;
-        sysopt_release();   /* the real sysconf processing comes later */
-    }
-    if (retval) {
-        lth = strlen(executable_path);
-        if (lth <= (int) portable_device_path_size - 1)
-            Strcpy(portable_device_path, executable_path);
-        else
-            retval = FALSE;
-    }
-    return retval;
+    return TRUE;
+//    int lth = 0;
+//    const char *sysconf = "sysconf";
+//    char tmppath[MAX_PATH];
+//    boolean retval = FALSE,
+//            save_initoptions_noterminate = iflags.initoptions_noterminate;
+//
+//    if (portable_device_path && folder_file_exists(executable_path, "sysconf")) {
+//        /*
+//           There is a sysconf file (not just sysconf.template) present in
+//           the exe path, which is not the way NetHack is initially distributed,
+//           so assume it means that the admin/installer wants to override
+//           something, perhaps set up for a fully-portable configuration that
+//           leaves no traces behind elsewhere on this computer's hard drive -
+//           delve into that...
+//         */
+//
+//        *portable_device_path = '\0';
+//        lth = sizeof tmppath - strlen(sysconf);
+//        (void) strncpy(tmppath, executable_path, lth - 1);
+//        tmppath[lth - 1] = '\0';
+//        (void) strcat(tmppath, sysconf);
+//
+//        iflags.initoptions_noterminate = 1;
+//        /* assure_syscf_file(); */
+//        config_error_init(TRUE, tmppath, FALSE);
+//        /* ... and _must_ parse correctly. */
+//        if (read_config_file(tmppath, SET_IN_SYS)
+//            && sysopt.portable_device_paths)
+//            retval = TRUE;
+//        (void) config_error_done();
+//        iflags.initoptions_noterminate = save_initoptions_noterminate;
+//        sysopt_release();   /* the real sysconf processing comes later */
+//    }
+//    if (retval) {
+//        lth = strlen(executable_path);
+//        if (lth <= (int) portable_device_path_size - 1)
+//            Strcpy(portable_device_path, executable_path);
+//        else
+//            retval = FALSE;
+//    }
+//    return retval;
 }
 
 static char portable_device_path[MAX_PATH];
