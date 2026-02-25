@@ -9,7 +9,7 @@ GuideBook 汉化文本基于 [NetHack_GuideBook_CN](https://github.com/w4ngzhen/NetHac
 目前进度：
 - [X] 合并 [NetHack-cn](https://github.com/SunnyYuer/NetHack-cn) 汉化文件
 - [ ] 合并与完善 GuideBook 汉化
-- [X] 同步至官方上游最新提交 [c96297c](https://github.com/NetHack/NetHack/tree/c96297c052696cd99026966c1fb8057af2c40de3)
+- [X] 同步至官方上游最新提交 [6ccc74e](https://github.com/NetHack/NetHack/commit/6ccc74e4acb0e7b73b76777323687f493afeceb8)
 - ~~自动化编译脚本~~
 - [ ] 其它未汉化内容完善
 
