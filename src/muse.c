@@ -72,12 +72,12 @@ struct obj *obj;
 
     if (obj->oclass == POTION_CLASS) {
         coord cc;
-        static const char *empty = "ÕâÆ¿Ò©Ë®Ô­À´ÊÇ¿ÕµÄ.";
+        static const char *empty = "ï¿½ï¿½Æ¿Ò©Ë®Ô­ï¿½ï¿½ï¿½Ç¿Õµï¿½.";
         const char *potion_descr;
         struct monst *mtmp;
 
         potion_descr = OBJ_DESCR(objects[obj->otyp]);
-        if (potion_descr && !strcmp(potion_descr, "Èé°×É«")) {
+        if (potion_descr && !strcmp(potion_descr, "ï¿½ï¿½ï¿½É«")) {
             if (!(mvitals[PM_GHOST].mvflags & G_GONE)
                 && !rn2(POTION_OCCUPANT_CHANCE(mvitals[PM_GHOST].born))) {
                 if (!enexto(&cc, mon->mx, mon->my, &mons[PM_GHOST]))
@@ -91,11 +91,11 @@ struct obj *obj;
                 } else {
                     if (vis) {
                         pline(
-                            "µ±%s´ò¿ªÆ¿×Ó, Ò»¸ö¾Þ´óµÄ%s¸¡ÏÖÁË!",
+                            "ï¿½ï¿½%sï¿½ï¿½Æ¿ï¿½ï¿½, Ò»ï¿½ï¿½ï¿½Þ´ï¿½ï¿½%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!",
                               mon_nam(mon),
                               Hallucination ? rndmonnam(NULL)
-                                            : (const char *) "¹í»ê");
-                        pline("%sÏÅµÃÒªËÀ, ²»ÄÜÒÆ¶¯ÁË.",
+                                            : (const char *) "ï¿½ï¿½ï¿½");
+                        pline("%sï¿½Åµï¿½Òªï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½.",
                               Monnam(mon));
                     }
                     paralyze_monst(mon, 3);
@@ -103,7 +103,7 @@ struct obj *obj;
                 return 2;
             }
         }
-        if (potion_descr && !strcmp(potion_descr, "Ã°ÑÌµÄ")
+        if (potion_descr && !strcmp(potion_descr, "Ã°ï¿½Ìµï¿½")
             && !(mvitals[PM_DJINNI].mvflags & G_GONE)
             && !rn2(POTION_OCCUPANT_CHANCE(mvitals[PM_DJINNI].born))) {
             if (!enexto(&cc, mon->mx, mon->my, &mons[PM_DJINNI]))
@@ -116,18 +116,18 @@ struct obj *obj;
                     pline1(empty);
             } else {
                 if (vis)
-                    pline("ÔÚÒ»Æ¬ÑÌÎíÖÐ, %s ¸¡ÏÖÁË!", a_monnam(mtmp));
+                    pline("ï¿½ï¿½Ò»Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, %s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!", a_monnam(mtmp));
                 pline("%s Ëµ.", vis ? Monnam(mtmp) : Something);
                 /* I suspect few players will be upset that monsters */
                 /* can't wish for wands of death here.... */
                 if (rn2(2)) {
-                    verbalize("ÄãÊÍ·ÅÁËÎÒ!");
+                    verbalize("ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½!");
                     mtmp->mpeaceful = 1;
                     set_malign(mtmp);
                 } else {
-                    verbalize("ÊÇÊ±ºòÁË.");
+                    verbalize("ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½.");
                     if (vis)
-                        pline("%s ÏûÊ§ÁË.", Monnam(mtmp));
+                        pline("%s ï¿½ï¿½Ê§ï¿½ï¿½.", Monnam(mtmp));
                     mongone(mtmp);
                 }
             }
@@ -141,16 +141,16 @@ struct obj *obj;
         /* 3.6.1: no Deaf filter; 'if' message doesn't warrant it, 'else'
            message doesn't need it since You_hear() has one of its own */
         if (vis) {
-            pline("%s »Ó¶¯%s, È´Í»È»±¬Õ¨ÁË!", Monnam(mon),
+            pline("%s ï¿½Ó¶ï¿½%s, È´Í»È»ï¿½ï¿½Õ¨ï¿½ï¿½!", Monnam(mon),
                   xname(obj));
         } else {
             /* same near/far threshold as mzapwand() */
             int range = couldsee(mon->mx, mon->my) /* 9 or 5 */
                            ? (BOLT_LIM + 1) : (BOLT_LIM - 3);
 
-            You_hear("%s»ÓÕÈºÍ±¬Õ¨Éù.",
+            You_hear("%sï¿½ï¿½ï¿½ÈºÍ±ï¿½Õ¨ï¿½ï¿½.",
                      (distu(mon->mx, mon->my) <= range * range)
-                        ? "½ü´¦µÄ" : "Ô¶´¦µÄ");
+                        ? "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : "Ô¶ï¿½ï¿½ï¿½ï¿½");
         }
         m_useup(mon, obj);
         mon->mhp -= dam;
@@ -176,15 +176,15 @@ boolean self;
         int range = couldsee(mtmp->mx, mtmp->my) /* 9 or 5 */
                        ? (BOLT_LIM + 1) : (BOLT_LIM - 3);
 
-        You_hear("%s»ÓÕÈÉù.", (distu(mtmp->mx, mtmp->my) <= range * range)
-                                 ? "¸½½üµÄ" : "Ô¶´¦µÄ");
+        You_hear("%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.", (distu(mtmp->mx, mtmp->my) <= range * range)
+                                 ? "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : "Ô¶ï¿½ï¿½ï¿½ï¿½");
         otmp->known = 0;
     } else if (self) {
-        pline("%s ÓÃ%s¶Ô%s×Ô¼º»Ó¶¯!",
+        pline("%s ï¿½ï¿½%sï¿½ï¿½%sï¿½Ô¼ï¿½ï¿½Ó¶ï¿½!",
               Monnam(mtmp), doname(otmp),
               mhim(mtmp));
     } else {
-        pline("%s »Ó¶¯%s!", Monnam(mtmp), xname(otmp));
+        pline("%s ï¿½Ó¶ï¿½%s!", Monnam(mtmp), xname(otmp));
         stop_occupation();
     }
     otmp->spe -= 1;
@@ -201,14 +201,14 @@ boolean self;
         int range = couldsee(mtmp->mx, mtmp->my) /* 9 or 5 */
                        ? (BOLT_LIM + 1) : (BOLT_LIM - 3);
 
-        You_hear("%sÒ»¸öºÅ½ÇÕý±»´µ×à.",
+        You_hear("%sÒ»ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.",
                  (distu(mtmp->mx, mtmp->my) <= range * range)
-                 ? "¸½½üµÄ" : "Ô¶´¦µÄ");
+                 ? "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : "Ô¶ï¿½ï¿½ï¿½ï¿½");
         otmp->known = 0; /* hero doesn't know how many charges are left */
     } else {
         otmp->dknown = 1;
-        pline("%s¶Ô×Å%s´µ×à%s!", Monnam(mtmp),
-              self ? mon_nam_too(mtmp, mtmp) : (char *) "Äã"), xname(otmp);
+        pline("%sï¿½ï¿½ï¿½ï¿½%sï¿½ï¿½ï¿½ï¿½%s!", Monnam(mtmp),
+              self ? mon_nam_too(mtmp, mtmp) : (char *) "ï¿½ï¿½"), xname(otmp);
         makeknown(otmp->otyp); /* (wands handle this slightly differently) */
         if (!self)
             stop_occupation();
@@ -244,16 +244,16 @@ struct obj *otmp;
     otmp->bknown = savebknown;
 
     if (vismon)
-        pline("%s ÔÄ¶Á%s!", Monnam(mtmp), onambuf);
+        pline("%s ï¿½Ä¶ï¿½%s!", Monnam(mtmp), onambuf);
     else
-        You_hear("%s ÔÚÔÄ¶Á%s.",
+        You_hear("%s ï¿½ï¿½ï¿½Ä¶ï¿½%s.",
                  x_monnam(mtmp, ARTICLE_A, (char *) 0,
                           (SUPPRESS_IT | SUPPRESS_INVISIBLE | SUPPRESS_SADDLE),
                           FALSE),
                  onambuf);
 
     if (mtmp->mconf)
-        pline("´¦ÓÚ»ìÂÒÖ®ÖÐ, %s ¶Á´íÁËÖäÓï...",
+        pline("ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½Ö®ï¿½ï¿½, %s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...",
               vismon ? mon_nam(mtmp) : mhe(mtmp));
 }
 
@@ -264,9 +264,9 @@ struct obj *otmp;
 {
     if (canseemon(mtmp)) {
         otmp->dknown = 1;
-        pline("%s ºÈ%s!", Monnam(mtmp), singular(otmp, doname));
+        pline("%s ï¿½ï¿½%s!", Monnam(mtmp), singular(otmp, doname));
     } else if (!Deaf)
-        You_hear("¹¾ßË¹¾ßËµÄÉùÒô.");
+        You_hear("ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½.");
 }
 
 /* Defines for various types of stuff.  The order in which monsters prefer
@@ -653,24 +653,24 @@ struct monst *mtmp;
     case MUSE_UNICORN_HORN:
         if (vismon) {
             if (otmp)
-                pline("%s Ê¹ÓÃÁËÒ»¸ö¶À½ÇÊÞµÄ½Ç!", Monnam(mtmp));
+                pline("%s Ê¹ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÞµÄ½ï¿½!", Monnam(mtmp));
             else
-                pline_The("%sµÄ½ÇµÄ¼â¶ËÔÚ·¢¹â!", mon_nam(mtmp));
+                pline_The("%sï¿½Ä½ÇµÄ¼ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½!", mon_nam(mtmp));
         }
         if (!mtmp->mcansee) {
             mcureblindness(mtmp, vismon);
         } else if (mtmp->mconf || mtmp->mstun) {
             mtmp->mconf = mtmp->mstun = 0;
             if (vismon)
-                pline("%s ÏÖÔÚËÆºõÎÈ¶¨ÁË.", Monnam(mtmp));
+                pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½Æºï¿½ï¿½È¶ï¿½ï¿½ï¿½.", Monnam(mtmp));
         } else
             impossible("No need for unicorn horn?");
         return 2;
     case MUSE_BUGLE:
         if (vismon)
-            pline("%s ÑÝ×à%s!", Monnam(mtmp), doname(otmp));
+            pline("%s ï¿½ï¿½ï¿½ï¿½%s!", Monnam(mtmp), doname(otmp));
         else if (!Deaf)
-            You_hear("Ò»¸ö¾üºÅÔÚÑÝ×àÆð´²ºÅ!");
+            You_hear("Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ð´²ºï¿½!");
         awaken_soldiers(mtmp);
         return 2;
     case MUSE_WAN_TELEPORTATION_SELF:
@@ -690,7 +690,7 @@ struct monst *mtmp;
         }
         if ((mon_has_amulet(mtmp) || On_W_tower_level(&u.uz)) && !rn2(3)) {
             if (vismon)
-                pline("%s ËÆºõÃÔÊ§·½ÏòÁËÆ¬¿Ì.", Monnam(mtmp));
+                pline("%s ï¿½Æºï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½.", Monnam(mtmp));
             return 2;
         }
         if (oseen && how)
@@ -722,14 +722,14 @@ struct monst *mtmp;
 
             if (mon_has_amulet(mtmp) || In_endgame(&u.uz)) {
                 if (vismon)
-                    pline("%s ËÆºõ·Ç³£ÃÔÊ§·½ÏòÁËÆ¬¿Ì.",
+                    pline("%s ï¿½Æºï¿½ï¿½Ç³ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½.",
                           Monnam(mtmp));
                 return 2;
             }
             nlev = random_teleport_level();
             if (nlev == depth(&u.uz)) {
                 if (vismon)
-                    pline("%s ·¢¶¶ÁËÆ¬¿Ì.", Monnam(mtmp));
+                    pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½.", Monnam(mtmp));
                 return 2;
             }
             get_level(&flev, nlev);
@@ -753,12 +753,12 @@ struct monst *mtmp;
             || (is_drawbridge_wall(mtmp->mx, mtmp->my) >= 0)
             || (sstairs.sx && sstairs.sx == mtmp->mx
                 && sstairs.sy == mtmp->my)) {
-            pline_The("ÍÚ¾òÉäÏßÊ§Ð§ÁË.");
+            pline_The("ï¿½Ú¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê§Ð§ï¿½ï¿½.");
             return 2;
         }
         if (!Can_dig_down(&u.uz) && !levl[mtmp->mx][mtmp->my].candig) {
             if (canseemon(mtmp))
-                pline_The("%s ÕâÀïºÜÄÑÍÚ½øÈ¥.",
+                pline_The("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½È¥.",
                           surface(mtmp->mx, mtmp->my));
             return 2;
         }
@@ -767,12 +767,12 @@ struct monst *mtmp;
             return 2;
         seetrap(ttmp);
         if (vis) {
-            pline("%s ÔÚ%sÀïÃæÖÆÔìÁËÒ»¸ö¶´.", Monnam(mtmp),
+            pline("%s ï¿½ï¿½%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½.", Monnam(mtmp),
                   surface(mtmp->mx, mtmp->my));
-            pline("%s %s ÏÂÈ¥...", Monnam(mtmp),
-                  is_flyer(mtmp->data) ? "³å" : "µô");
+            pline("%s %s ï¿½ï¿½È¥...", Monnam(mtmp),
+                  is_flyer(mtmp->data) ? "ï¿½ï¿½" : "ï¿½ï¿½");
         } else if (!Deaf)
-            You_hear("%s ³å¹ýÁË%s.", something,
+            You_hear("%s ï¿½ï¿½ï¿½ï¿½ï¿½%s.", something,
                      surface(mtmp->mx, mtmp->my));
         /* we made sure that there is a level for mtmp to go to */
         migrate_to_level(mtmp, ledger_no(&u.uz) + 1, MIGR_RANDOM,
@@ -846,9 +846,9 @@ struct monst *mtmp;
             struct trap *t = t_at(trapx, trapy);
 
             Mnam = Monnam(mtmp);
-            pline("%s%s½øÁËÒ»¸ö%s!", Mnam,
-                  vtense(fakename[0], locomotion(mtmp->data, "Ìø")),
-                  (t->ttyp == TRAPDOOR) ? "ÏÝÚåÃÅ" : "¶´");
+            pline("%s%sï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½%s!", Mnam,
+                  vtense(fakename[0], locomotion(mtmp->data, "ï¿½ï¿½")),
+                  (t->ttyp == TRAPDOOR) ? "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : "ï¿½ï¿½");
             if (levl[trapx][trapy].typ == SCORR) {
                 levl[trapx][trapy].typ = CORR;
                 unblock_point(trapx, trapy);
@@ -875,7 +875,7 @@ struct monst *mtmp;
             && (dunlev(&u.uz) < dunlevs_in_dungeon(&u.uz) - 3)) {
             if (vismon)
                 pline(
-    "µ±%s ÅÀÂ¥ÌÝµÄÊ±ºò, Ò»ÖÖÉñÃØµÄÁ¦Á¿Á¢¿ÌÎ§ÈÆ×Å %s...",
+    "ï¿½ï¿½%s ï¿½ï¿½Â¥ï¿½Ýµï¿½Ê±ï¿½ï¿½, Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½ %s...",
                       mon_nam(mtmp), mhim(mtmp));
             /* simpler than for the player; this will usually be
                the Wizard and he'll immediately go right to the
@@ -885,7 +885,7 @@ struct monst *mtmp;
                              (coord *) 0);
         } else {
             if (vismon)
-                pline("%s ÌÓÍùÂ¥ÉÏ!", Monnam(mtmp));
+                pline("%s ï¿½ï¿½ï¿½ï¿½Â¥ï¿½ï¿½!", Monnam(mtmp));
             migrate_to_level(mtmp, ledger_no(&u.uz) - 1, MIGR_STAIRS_DOWN,
                              (coord *) 0);
         }
@@ -893,21 +893,21 @@ struct monst *mtmp;
     case MUSE_DOWNSTAIRS:
         m_flee(mtmp);
         if (vismon)
-            pline("%s ÌÓÍùÂ¥ÏÂ!", Monnam(mtmp));
+            pline("%s ï¿½ï¿½ï¿½ï¿½Â¥ï¿½ï¿½!", Monnam(mtmp));
         migrate_to_level(mtmp, ledger_no(&u.uz) + 1, MIGR_STAIRS_UP,
                          (coord *) 0);
         return 2;
     case MUSE_UP_LADDER:
         m_flee(mtmp);
         if (vismon)
-            pline("%s ´ÓÌÝ×ÓÍùÉÏÌÓ!", Monnam(mtmp));
+            pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!", Monnam(mtmp));
         migrate_to_level(mtmp, ledger_no(&u.uz) - 1, MIGR_LADDER_DOWN,
                          (coord *) 0);
         return 2;
     case MUSE_DN_LADDER:
         m_flee(mtmp);
         if (vismon)
-            pline("%s ´ÓÌÝ×ÓÍùÏÂÌÓ!", Monnam(mtmp));
+            pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!", Monnam(mtmp));
         migrate_to_level(mtmp, ledger_no(&u.uz) + 1, MIGR_LADDER_UP,
                          (coord *) 0);
         return 2;
@@ -925,13 +925,13 @@ struct monst *mtmp;
             if (mon_has_special(mtmp))
                 return 0;
             if (vismon)
-                pline("%s ÌÓÀëÁËµØÀÎ!", Monnam(mtmp));
+                pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½!", Monnam(mtmp));
             mongone(mtmp);
             return 2;
         }
         if (vismon)
-            pline("%s ÌÓÍùÂ¥%s!", Monnam(mtmp),
-                  sstairs.up ? "ÉÏ" : "ÏÂ");
+            pline("%s ï¿½ï¿½ï¿½ï¿½Â¥%s!", Monnam(mtmp),
+                  sstairs.up ? "ï¿½ï¿½" : "ï¿½ï¿½");
         /* going from the Valley to Castle (Stronghold) has no sstairs
            to target, but having sstairs.<sx,sy> == <0,0> will work the
            same as specifying MIGR_RANDOM when mon_arrive() eventually
@@ -943,8 +943,8 @@ struct monst *mtmp;
         m_flee(mtmp);
         if (vis) {
             Mnam = Monnam(mtmp);
-            pline("%s%sÉÏÁËÒ»¸ö´«ËÍÏÝÚå!", Mnam,
-                  vtense(fakename[0], locomotion(mtmp->data, "Ìø")));
+            pline("%s%sï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!", Mnam,
+                  vtense(fakename[0], locomotion(mtmp->data, "ï¿½ï¿½")));
             seetrap(t_at(trapx, trapy));
         }
         /*  don't use rloc_to() because worm tails must "move" */
@@ -965,7 +965,7 @@ struct monst *mtmp;
         if (!otmp->cursed && !mtmp->mcansee)
             mcureblindness(mtmp, vismon);
         if (vismon)
-            pline("%s ¿´ÆðÀ´ºÃÐ©ÁË.", Monnam(mtmp));
+            pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð©ï¿½ï¿½.", Monnam(mtmp));
         if (oseen)
             makeknown(POT_HEALING);
         m_useup(mtmp, otmp);
@@ -979,7 +979,7 @@ struct monst *mtmp;
         if (!mtmp->mcansee)
             mcureblindness(mtmp, vismon);
         if (vismon)
-            pline("%s ¿´ÆðÀ´ºÃ¶àÁË.", Monnam(mtmp));
+            pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½.", Monnam(mtmp));
         if (oseen)
             makeknown(POT_EXTRA_HEALING);
         m_useup(mtmp, otmp);
@@ -992,7 +992,7 @@ struct monst *mtmp;
         if (!mtmp->mcansee && otmp->otyp != POT_SICKNESS)
             mcureblindness(mtmp, vismon);
         if (vismon)
-            pline("%s ¿´ÆðÀ´ÍêÈ«ÖÎÓúÁË.", Monnam(mtmp));
+            pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.", Monnam(mtmp));
         if (oseen)
             makeknown(otmp->otyp);
         m_useup(mtmp, otmp);
@@ -1251,28 +1251,28 @@ register struct obj *otmp;
                 makeknown(WAN_STRIKING);
             if (Antimagic) {
                 shieldeff(u.ux, u.uy);
-                pline("àÔ!");
+                pline("ï¿½ï¿½!");
             } else if (rnd(20) < 10 + u.uac) {
-                pline_The("Ä§ÕÈ´òÖÐÁËÄã!");
+                pline_The("Ä§ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
                 tmp = d(2, 12);
                 if (Half_spell_damage)
                     tmp = (tmp + 1) / 2;
-                losehp(tmp, "Ä§ÕÈ", KILLED_BY_AN);
+                losehp(tmp, "Ä§ï¿½ï¿½", KILLED_BY_AN);
             } else
-                pline_The("Ä§ÕÈÃ»´òÖÐÄã.");
+                pline_The("Ä§ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.");
             stop_occupation();
             nomul(0);
         } else if (resists_magm(mtmp)) {
             shieldeff(mtmp->mx, mtmp->my);
-            pline("àÔ!");
+            pline("ï¿½ï¿½!");
         } else if (rnd(20) < 10 + find_mac(mtmp)) {
             tmp = d(2, 12);
-            hit("Ä§ÕÈ", mtmp, exclam(tmp));
+            hit("Ä§ï¿½ï¿½", mtmp, exclam(tmp));
             (void) resist(mtmp, otmp->oclass, tmp, TELL);
             if (cansee(mtmp->mx, mtmp->my) && zap_oseen)
                 makeknown(WAN_STRIKING);
         } else {
-            miss("Ä§ÕÈ", mtmp);
+            miss("Ä§ï¿½ï¿½", mtmp);
             if (cansee(mtmp->mx, mtmp->my) && zap_oseen)
                 makeknown(WAN_STRIKING);
         }
@@ -1287,7 +1287,7 @@ register struct obj *otmp;
             /* for consistency with zap.c, don't identify */
             if (mtmp->ispriest && *in_rooms(mtmp->mx, mtmp->my, TEMPLE)) {
                 if (cansee(mtmp->mx, mtmp->my))
-                    pline("%s µÖ¿¹ÁËÄ§·¨!", Monnam(mtmp));
+                    pline("%s ï¿½Ö¿ï¿½ï¿½ï¿½Ä§ï¿½ï¿½!", Monnam(mtmp));
             } else if (!tele_restrict(mtmp))
                 (void) rloc(mtmp, TRUE);
         }
@@ -1460,12 +1460,12 @@ struct monst *mtmp;
         mreadmsg(mtmp, otmp);
         /* Identify the scroll */
         if (canspotmon(mtmp)) {
-            pline_The("%sÔÚ%sµÄ%sÂ¡Â¡×÷Ïì!", ceiling(mtmp->mx, mtmp->my),
-                      mon_nam(mtmp), otmp->blessed ? "ÖÜÎ§" : "ÉÏÃæ");
+            pline_The("%sï¿½ï¿½%sï¿½ï¿½%sÂ¡Â¡ï¿½ï¿½ï¿½ï¿½!", ceiling(mtmp->mx, mtmp->my),
+                      mon_nam(mtmp), otmp->blessed ? "ï¿½ï¿½Î§" : "ï¿½ï¿½ï¿½ï¿½");
             if (oseen)
                 makeknown(otmp->otyp);
         } else if (cansee(mtmp->mx, mtmp->my)) {
-            pline_The("%sÔÚÆ«Ô¶µØ·½Â¡Â¡×÷Ïì!",
+            pline_The("%sï¿½ï¿½Æ«Ô¶ï¿½Ø·ï¿½Â¡Â¡ï¿½ï¿½ï¿½ï¿½!",
                       ceiling(mtmp->mx, mtmp->my));
             if (mtmp->minvis)
                 map_invisible(mtmp->mx, mtmp->my);
@@ -1554,7 +1554,7 @@ struct monst *mtmp;
          */
         if (cansee(mtmp->mx, mtmp->my)) {
             otmp->dknown = 1;
-            pline("%s ÓÃÁ¦Í¶ÖÀ%s!", Monnam(mtmp), singular(otmp, doname));
+            pline("%s ï¿½ï¿½ï¿½ï¿½Í¶ï¿½ï¿½%s!", Monnam(mtmp), singular(otmp, doname));
         }
         m_throw(mtmp, mtmp->mx, mtmp->my, sgn(mtmp->mux - mtmp->mx),
                 sgn(mtmp->muy - mtmp->my),
@@ -1801,7 +1801,7 @@ struct monst *mtmp;
                 if (on_level(&tolevel, &u.uz))
                     goto skipmsg;
                 if (vismon) {
-                    pline("%s ÉÏÉý, ´©¹ýÁË%s!", Monnam(mtmp),
+                    pline("%s ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%s!", Monnam(mtmp),
                           ceiling(mtmp->mx, mtmp->my));
                     if (!objects[POT_GAIN_LEVEL].oc_name_known
                         && !objects[POT_GAIN_LEVEL].oc_uname)
@@ -1814,7 +1814,7 @@ struct monst *mtmp;
             } else {
  skipmsg:
                 if (vismon) {
-                    pline("%s ¿´ÆðÀ´²»°²µÄ.", Monnam(mtmp));
+                    pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.", Monnam(mtmp));
                     if (!objects[POT_GAIN_LEVEL].oc_name_known
                         && !objects[POT_GAIN_LEVEL].oc_uname)
                         docall(otmp);
@@ -1824,7 +1824,7 @@ struct monst *mtmp;
             }
         }
         if (vismon)
-            pline("%s ËÆºõ¸üÓÐ¾­ÑéÁË.", Monnam(mtmp));
+            pline("%s ï¿½Æºï¿½ï¿½ï¿½ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ï¿½.", Monnam(mtmp));
         if (oseen)
             makeknown(POT_GAIN_LEVEL);
         m_useup(mtmp, otmp);
@@ -1843,11 +1843,11 @@ struct monst *mtmp;
         mon_set_minvis(mtmp);
         if (vismon && mtmp->minvis) { /* was seen, now invisible */
             if (canspotmon(mtmp)) {
-                pline("%sÉíÌå³ÊÏÖ³ö%sÍ¸Ã÷.",
+                pline("%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½%sÍ¸ï¿½ï¿½.",
                       upstart(s_suffix(nambuf)),
-                      Hallucination ? "Õý³£µÄ" : "Ææ¹ÖµÄ");
+                      Hallucination ? "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : "ï¿½ï¿½Öµï¿½");
             } else {
-                pline("Í»È»Äã¿´²»µ½%sÁË.", nambuf);
+                pline("Í»È»ï¿½ã¿´ï¿½ï¿½ï¿½ï¿½%sï¿½ï¿½.", nambuf);
                 if (vis)
                     map_invisible(mtmp->mx, mtmp->my);
             }
@@ -1882,7 +1882,7 @@ struct monst *mtmp;
     case MUSE_POT_POLYMORPH:
         mquaffmsg(mtmp, otmp);
         if (vismon)
-            pline("%sÍ»È»±ä»¯ÁË!", Monnam(mtmp));
+            pline("%sÍ»È»ï¿½ä»¯ï¿½ï¿½!", Monnam(mtmp));
         (void) newcham(mtmp, muse_newcham_mon(mtmp), FALSE, FALSE);
         if (oseen)
             makeknown(POT_POLYMORPH);
@@ -1892,8 +1892,8 @@ struct monst *mtmp;
         if (vismon) {
             const char *Mnam = Monnam(mtmp);
 
-            pline("%s¹ÊÒâ%sÉÏÒ»¸ö±äÐÎÏÝÚå!", Mnam,
-                  vtense(fakename[0], locomotion(mtmp->data, "Ìø")));
+            pline("%sï¿½ï¿½ï¿½ï¿½%sï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!", Mnam,
+                  vtense(fakename[0], locomotion(mtmp->data, "ï¿½ï¿½")));
         }
         if (vis)
             seetrap(t_at(trapx, trapy));
@@ -1911,11 +1911,11 @@ struct monst *mtmp;
     case MUSE_BULLWHIP:
         /* attempt to disarm hero */
         {
-            const char *The_whip = vismon ? "Å£±Þ" : "±Þ×Ó";
+            const char *The_whip = vismon ? "Å£ï¿½ï¿½" : "ï¿½ï¿½ï¿½ï¿½";
             int where_to = rn2(4);
             struct obj *obj = uwep;
             const char *hand;
-            char the_weapon[BUFSZ];
+            char the_weapon[BUFSZ], hand_buf[BUFSZ];
 
             if (!obj || !canletgo(obj, "")
                 || (u.twoweap && canletgo(uswapwep, "") && rn2(2)))
@@ -1927,25 +1927,27 @@ struct monst *mtmp;
             hand = body_part(HAND);
             if (bimanual(obj))
                 hand = makeplural(hand);
+            (void) strncpy(hand_buf, hand, sizeof hand_buf - 1);
+            hand_buf[sizeof hand_buf - 1] = '\0';
 
             if (vismon)
-                pline("%sÓÃÅ£±Þ³¯ÏòÄãµÄ%sÇá´ò!", Monnam(mtmp),
-                      hand);
+                pline("%sï¿½ï¿½Å£ï¿½Þ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%sï¿½ï¿½ï¿½!", Monnam(mtmp),
+                      hand_buf);
             if (obj->otyp == HEAVY_IRON_BALL) {
-                pline("%sÃ»ÄÜ²øÈÆ×¡%s.", The_whip, the_weapon);
+                pline("%sÃ»ï¿½Ü²ï¿½ï¿½ï¿½×¡%s.", The_whip, the_weapon);
                 return 1;
             }
-            pline("%s²øÈÆ×¡ÁËÄãÄÃ×ÅµÄ%s!", The_whip,
+            pline("%sï¿½ï¿½ï¿½ï¿½×¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½%s!", The_whip,
                   the_weapon);
             if (welded(obj)) {
-                pline("%sÕ³µ½ÁËÄãµÄ%sÉÏ%c",
-                      !is_plural(obj) ? "Ëü±»" : "ËüÃÇ±»", hand,
+                pline("%sÕ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%sï¿½ï¿½%c",
+                      !is_plural(obj) ? "ï¿½ï¿½ï¿½ï¿½" : "ï¿½ï¿½ï¿½Ç±ï¿½", hand_buf,
                       !obj->bknown ? '!' : '.');
                 /* obj->bknown = 1; */ /* welded() takes care of this */
                 where_to = 0;
             }
             if (!where_to) {
-                pline_The("±Þ×Ó»¬ÂäÁË."); /* not `The_whip' */
+                pline_The("ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½."); /* not `The_whip' */
                 return 1;
             } else if (where_to == 3 && mon_hates_silver(mtmp)
                        && objects[obj->otyp].oc_material == SILVER) {
@@ -1957,17 +1959,17 @@ struct monst *mtmp;
             freeinv(obj);
             switch (where_to) {
             case 1: /* onto floor beneath mon */
-                pline("%s´ÓÄãµÄ%sÖÐÃÍÀ­%s !", Monnam(mtmp),
-                      hand, the_weapon);
+                pline("%sï¿½ï¿½ï¿½ï¿½ï¿½%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%s !", Monnam(mtmp), the_weapon,
+                      hand_buf);
                 place_object(obj, mtmp->mx, mtmp->my);
                 break;
             case 2: /* onto floor beneath you */
-                pline("%sÃÍÀ­%sµ½%s!", Monnam(mtmp), the_weapon,
+                pline("%sï¿½ï¿½ï¿½ï¿½%sï¿½ï¿½%s!", Monnam(mtmp), the_weapon,
                       surface(u.ux, u.uy));
                 dropy(obj);
                 break;
             case 3: /* into mon's inventory */
-                pline("%sÇÀ¶áÁË%s!", Monnam(mtmp), the_weapon);
+                pline("%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%s!", Monnam(mtmp), the_weapon);
                 (void) mpickobj(mtmp, obj);
                 break;
             }
@@ -1988,7 +1990,7 @@ STATIC_OVL void
 you_aggravate(mtmp)
 struct monst *mtmp;
 {
-    pline("²»ÖªÊ²Ã´Ô­Òò, %s ´æÔÚ±»ÄãÖªµÀÁË.",
+    pline("ï¿½ï¿½ÖªÊ²Ã´Ô­ï¿½ï¿½, %s ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½Öªï¿½ï¿½ï¿½ï¿½.",
           s_suffix(noit_mon_nam(mtmp)));
     cls();
 #ifdef CLIPPING
@@ -1996,12 +1998,12 @@ struct monst *mtmp;
 #endif
     show_glyph(mtmp->mx, mtmp->my, mon_to_glyph(mtmp, rn2_on_display_rng));
     display_self();
-    You_feel("¶Ô%sÄÕ»ð.", noit_mon_nam(mtmp));
+    You_feel("ï¿½ï¿½%sï¿½Õ»ï¿½.", noit_mon_nam(mtmp));
     display_nhwindow(WIN_MAP, TRUE);
     docrt();
     if (unconscious()) {
         multi = -1;
-        nomovemsg = "ÒòÎªÄÕ»ð, ÄãÃÍÈ»ÐÑÎªÈ«ÒâÊ¶.";
+        nomovemsg = "ï¿½ï¿½Îªï¿½Õ»ï¿½, ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ÎªÈ«ï¿½ï¿½Ê¶.";
     }
     newsym(mtmp->mx, mtmp->my);
     if (!canspotmon(mtmp))
@@ -2130,19 +2132,19 @@ const char *str;
 
     if (orefl && orefl->otyp == SHIELD_OF_REFLECTION) {
         if (str) {
-            pline(str, s_suffix(mon_nam(mon)), "¶ÜÅÆ");
+            pline(str, s_suffix(mon_nam(mon)), "ï¿½ï¿½ï¿½ï¿½");
             makeknown(SHIELD_OF_REFLECTION);
         }
         return TRUE;
     } else if (arti_reflects(MON_WEP(mon))) {
         /* due to wielded artifact weapon */
         if (str)
-            pline(str, s_suffix(mon_nam(mon)), "ÎäÆ÷");
+            pline(str, s_suffix(mon_nam(mon)), "ï¿½ï¿½ï¿½ï¿½");
         return TRUE;
     } else if ((orefl = which_armor(mon, W_AMUL))
                && orefl->otyp == AMULET_OF_REFLECTION) {
         if (str) {
-            pline(str, s_suffix(mon_nam(mon)), "»¤Éí·û");
+            pline(str, s_suffix(mon_nam(mon)), "ï¿½ï¿½ï¿½ï¿½ï¿½");
             makeknown(AMULET_OF_REFLECTION);
         }
         return TRUE;
@@ -2150,13 +2152,13 @@ const char *str;
                && (orefl->otyp == SILVER_DRAGON_SCALES
                    || orefl->otyp == SILVER_DRAGON_SCALE_MAIL)) {
         if (str)
-            pline(str, s_suffix(mon_nam(mon)), "¿ø¼×");
+            pline(str, s_suffix(mon_nam(mon)), "ï¿½ï¿½ï¿½ï¿½");
         return TRUE;
     } else if (mon->data == &mons[PM_SILVER_DRAGON]
                || mon->data == &mons[PM_CHROMATIC_DRAGON]) {
         /* Silver dragons only reflect when mature; babies do not */
         if (str)
-            pline(str, s_suffix(mon_nam(mon)), "ÁÛÆ¬");
+            pline(str, s_suffix(mon_nam(mon)), "ï¿½ï¿½Æ¬");
         return TRUE;
     }
     return FALSE;
@@ -2169,28 +2171,28 @@ const char *fmt, *str;
     /* Check from outermost to innermost objects */
     if (EReflecting & W_ARMS) {
         if (fmt && str) {
-            pline(fmt, str, "¶ÜÅÆ");
+            pline(fmt, str, "ï¿½ï¿½ï¿½ï¿½");
             makeknown(SHIELD_OF_REFLECTION);
         }
         return TRUE;
     } else if (EReflecting & W_WEP) {
         /* Due to wielded artifact weapon */
         if (fmt && str)
-            pline(fmt, str, "ÎäÆ÷");
+            pline(fmt, str, "ï¿½ï¿½ï¿½ï¿½");
         return TRUE;
     } else if (EReflecting & W_AMUL) {
         if (fmt && str) {
-            pline(fmt, str, "¹Ò×¹");
+            pline(fmt, str, "ï¿½ï¿½×¹");
             makeknown(AMULET_OF_REFLECTION);
         }
         return TRUE;
     } else if (EReflecting & W_ARM) {
         if (fmt && str)
-            pline(fmt, str, uskin ? "¹âÔó" : "¿ø¼×");
+            pline(fmt, str, uskin ? "ï¿½ï¿½ï¿½ï¿½" : "ï¿½ï¿½ï¿½ï¿½");
         return TRUE;
     } else if (youmonst.data == &mons[PM_SILVER_DRAGON]) {
         if (fmt && str)
-            pline(fmt, str, "ÁúÁÛ");
+            pline(fmt, str, "ï¿½ï¿½ï¿½ï¿½");
         return TRUE;
     }
     return FALSE;
@@ -2206,7 +2208,7 @@ boolean verbos;
         mon->mcansee = 1;
         mon->mblinded = 0;
         if (verbos && haseyes(mon->data))
-            pline("%s ÓÖÄÜ¿´¼ûÁË.", Monnam(mon));
+            pline("%s ï¿½ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½.", Monnam(mon));
     }
 }
 
@@ -2260,14 +2262,14 @@ boolean stoning; /* True: stop petrification, False: cure stun && confusion */
         obj->quan = 1L;
         pline("%s %s %s.", Monnam(mon),
               (obj->oclass == POTION_CLASS)
-                  ? "Í´Òû"
-                  : (obj->otyp == TIN) ? "´ò¿ª²¢³Ô"
-                                       : "³Ô",
+                  ? "Í´ï¿½ï¿½"
+                  : (obj->otyp == TIN) ? "ï¿½ò¿ª²ï¿½ï¿½ï¿½"
+                                       : "ï¿½ï¿½",
               distant_name(obj, doname));
         obj->quan = save_quan;
     } else if (!Deaf)
-        You_hear("%sµÄÉùÒô.",
-                 (obj->oclass == POTION_CLASS) ? "ºÈ" : "¾×½À");
+        You_hear("%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.",
+                 (obj->oclass == POTION_CLASS) ? "ï¿½ï¿½" : "ï¿½×½ï¿½");
 
     m_useup(mon, obj);
     /* obj is now gone */
@@ -2275,9 +2277,9 @@ boolean stoning; /* True: stop petrification, False: cure stun && confusion */
     if (acid && !tinned && !resists_acid(mon)) {
         mon->mhp -= rnd(15);
         if (vis)
-            pline("%sµÄÎ¸ËáºÜÑÏÖØ.", Monnam(mon));
+            pline("%sï¿½ï¿½Î¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.", Monnam(mon));
         if (DEADMONSTER(mon)) {
-            pline("%sËÀÁË!", Monnam(mon));
+            pline("%sï¿½ï¿½ï¿½ï¿½!", Monnam(mon));
             if (by_you)
                 /* hero gets credit (experience) and blame (possible loss
                    of alignment and/or luck and/or telepathy depending on
@@ -2290,16 +2292,16 @@ boolean stoning; /* True: stop petrification, False: cure stun && confusion */
     }
     if (stoning && vis) {
         if (Hallucination)
-            pline("Ì«ÒÅº¶ÁË - %s ¸Õ¸Õ»ÙÁËÎ´À´µÄÒ»¼þÒÕÊõÆ·!",
+            pline("Ì«ï¿½Åºï¿½ï¿½ï¿½ - %s ï¿½Õ¸Õ»ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·!",
                   mon_nam(mon));
         else
-            pline("%s ËÆºõÈáÈíµÄ!", Monnam(mon));
+            pline("%s ï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!", Monnam(mon));
     }
     if (lizard && (mon->mconf || mon->mstun)) {
         mon->mconf = 0;
         mon->mstun = 0;
         if (vis && !is_bat(mon->data) && mon->data != &mons[PM_STALKER])
-            pline("%s ÏÖÔÚËÆºõÎÈ¶¨ÁË.", Monnam(mon));
+            pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½Æºï¿½ï¿½È¶ï¿½ï¿½ï¿½.", Monnam(mon));
     }
     if (mon->mtame && !mon->isminion && nutrit > 0) {
         struct edog *edog = EDOG(mon);
@@ -2452,8 +2454,8 @@ boolean by_you; /* true: if mon kills itself, hero gets credit/blame */
     boolean vis = canseemon(mon), res = TRUE;
 
     if (vis)
-        pline("%s ¿ªÊ¼±ä%sÁË.", Monnam(mon),
-              green_mon(mon) ? "³ÉÈíÄà" : hcolor(NH_GREEN));
+        pline("%s ï¿½ï¿½Ê¼ï¿½ï¿½%sï¿½ï¿½.", Monnam(mon),
+              green_mon(mon) ? "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : hcolor(NH_GREEN));
     /* -4 => sliming, causes quiet loss of enhanced speed */
     mon_adjust_speed(mon, -4, (struct obj *) 0);
 
@@ -2462,7 +2464,7 @@ boolean by_you; /* true: if mon kills itself, hero gets credit/blame */
 
         if (mon->mx == trap->tx && mon->my == trap->ty) {
             if (vis)
-                pline("%s ´¥·¢ÁË%s»ðÑæÏÝÚå!", Mnam,
+                pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!", Mnam,
                       trap->tseen ? "" : "");
         } else {
             remove_monster(mon->mx, mon->my);
@@ -2472,10 +2474,10 @@ boolean by_you; /* true: if mon kills itself, hero gets credit/blame */
                 worm_move(mon);
             newsym(mon->mx, mon->my);
             if (vis)
-                pline("%s%s%s%s»ðÑæÏÝÚå!", Mnam,
-                      vtense(fakename[0], locomotion(mon->data, "×ß")),
-                      is_floater(mon->data) ? "¹ý" : "ÉÏ",
-                      trap->tseen ? "ÄÇ¸ö" : "Ò»¸ö");
+                pline("%s%s%s%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!", Mnam,
+                      vtense(fakename[0], locomotion(mon->data, "ï¿½ï¿½")),
+                      is_floater(mon->data) ? "ï¿½ï¿½" : "ï¿½ï¿½",
+                      trap->tseen ? "ï¿½Ç¸ï¿½" : "Ò»ï¿½ï¿½");
         }
         /* hack to avoid mintrap()'s chance of avoiding known trap */
         mon->mtrapseen &= ~(1 << (FIRE_TRAP - 1));
@@ -2483,7 +2485,7 @@ boolean by_you; /* true: if mon kills itself, hero gets credit/blame */
     } else if (otyp == STRANGE_OBJECT) {
         /* monster is using fire breath on self */
         if (vis)
-            pline("%s ÍÂ³ö»ðÀ´.", Monnam(mon));
+            pline("%s ï¿½Â³ï¿½ï¿½ï¿½ï¿½ï¿½.", Monnam(mon));
         if (!rn2(3))
             mon->mspec_used = rn1(10, 5);
         /* -21 => monster's fire breath; 1 => # of damage dice */
@@ -2492,7 +2494,7 @@ boolean by_you; /* true: if mon kills itself, hero gets credit/blame */
         mreadmsg(mon, obj);
         if (mon->mconf) {
             if (cansee(mon->mx, mon->my))
-                pline("Å¶, ¶àÃ´Æ¯ÁÁµÄ»ð!");
+                pline("Å¶, ï¿½ï¿½Ã´Æ¯ï¿½ï¿½ï¿½Ä»ï¿½!");
             if (vis && !objects[otyp].oc_name_known
                 && !objects[otyp].oc_uname)
                 docall(obj);
@@ -2528,20 +2530,20 @@ boolean by_you; /* true: if mon kills itself, hero gets credit/blame */
                    for pacifist conduct); xkilled()'s message would say
                    "You killed/destroyed <mon>" so give our own message */
                 if (vis)
-                    pline("%s ±»»ðÑæ%s!", Monnam(mon),
-                          nonliving(mon->data) ? "ÏûÃðÁË" : "É±ËÀÁË");
+                    pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%s!", Monnam(mon),
+                          nonliving(mon->data) ? "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : "É±ï¿½ï¿½ï¿½ï¿½");
                 xkilled(mon, XKILL_NOMSG | XKILL_NOCONDUCT);
             } else
-                monkilled(mon, "»ðÑæ", AD_FIRE);
+                monkilled(mon, "ï¿½ï¿½ï¿½ï¿½", AD_FIRE);
         } else {
             /* non-fatal damage occurred */
             if (vis)
-                pline("%s ±»ÉÕÉËÁË%s", Monnam(mon), exclam(dmg));
+                pline("%s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%s", Monnam(mon), exclam(dmg));
         }
     }
     if (vis) {
         if (res && !DEADMONSTER(mon))
-            pline("%sð¤Òº±»ÉÕµôÁË!", s_suffix(Monnam(mon)));
+            pline("%sï¿½Òºï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½!", s_suffix(Monnam(mon)));
         if (otyp != STRANGE_OBJECT)
             makeknown(otyp);
     }
@@ -2582,7 +2584,7 @@ struct monst *mon;
         return (ptr->mcolor == CLR_GREEN || ptr->mcolor == CLR_BRIGHT_GREEN);
 #endif
     /* approximation */
-    if (strstri(ptr->mname, "ÂÌ"))
+    if (strstri(ptr->mname, "ï¿½ï¿½"))
         return TRUE;
     switch (monsndx(ptr)) {
     case PM_FOREST_CENTAUR:
